@@ -1,1 +1,18 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="Rnf-ri-#PFIr(W1E46gv">mySprite</variable><variable type="KIND_SpriteKind" id="0;9KT]kkNEJ8HY10b_tt">Player</variable><variable type="KIND_SpriteKind" id="c]?WM!q6f#ZneaoN3.{9">Projectile</variable><variable type="KIND_SpriteKind" id="Gc~|a5)Q=]4EH795^pPD">Food</variable><variable type="KIND_SpriteKind" id="J)F]]Y5;!emW6cFe*kTT">Enemy</variable></variables><block type="pxt-on-start" id="=giREm.C-9/*m?dO6EV8" x="0" y="0"><statement name="HANDLER"><block type="arcade_game_reset" id="`WOVM.ki.If(roKD=j.`"></block></statement></block></xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="Fr3vE-XGEi$IxRvo%/n,">mySprite</variable><variable type="KIND_SpriteKind" id="NU.C.Vt`/!O:wt`IRF1i">Player</variable><variable type="KIND_SpriteKind" id="`rl[?0eavr(0wai![HP7">Projectile</variable><variable type="KIND_SpriteKind" id="-m$Fqyne#u61m7u!K21i">Food</variable><variable type="KIND_SpriteKind" id="8:QE7kR83Kj74GQ?-Z^l">Enemy</variable></variables><block type="pxt-on-start" id="Eo++mAMer-O8b3=rBe([" x="20" y="20"><statement name="HANDLER"><block type="variables_set" id="ip3Ym|B9ss9i1XyrH`KO"><field name="VAR" id="Fr3vE-XGEi$IxRvo%/n,">mySprite</field><value name="VALUE"><shadow type="math_number" id="Miyq;3H-)-@650pxQl;}"><field name="NUM">0</field></shadow><block type="spritescreate" id="m%$inhKcElic~Y_sS~_l"><value name="img"><shadow type="screen_image_picker" id="7/+ze(Uj=kiL;4C$NzQF"><field name="img">img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`</field><data>{"commentRefs":[],"fieldData":{"img":null}}</data></shadow></value><value name="kind"><shadow type="spritekind" id="N1w|rzjcGdPf*/.N.^@G"><field name="MEMBER">Player</field></shadow></value></block></value><next><block type="gamesetbackgroundcolor" id="?s{NMxRcu(+9Au2psr!$"><value name="color"><shadow type="colorindexpicker" id="kn2I^,YG-Xa0{;SIy+ea"><field name="index">0</field></shadow></value><next><block type="music_playable_play" id="PsTfZ}e;x_6K$QqKKiuE"><field name="playbackMode">music.PlaybackMode.UntilDone</field><value name="toPlay"><shadow type="music_melody_playable" id="Fk^g_.M|_St`z9[-:(Ov"><field name="melody">music.baDing</field></shadow><block type="music_string_playable" id="qFaC})7}d,Z}e-rfg2JO"><value name="melody"><shadow type="melody_editor" id="(_-XX!`BX~5b]`v^Fw*T"><field name="melody">"- - - - - - - - "</field></shadow></value><value name="tempo"><shadow type="math_number_minmax" id="eN!Jzhl*B;BCV?4`Crzu"><mutation min="40" max="500" label="Tempo" precision="0"></mutation><field name="SLIDER">120</field></shadow></value></block></value><next><block type="arcade_game_reset" id="*[=`J^Wq3~K|*5ia*n%["></block></next></block></next></block></next></block></statement></block></xml>
