@@ -1,6 +1,62 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    myDart.throwDart()
+    Projectiles(myDart)
+})
+function Projectiles (dart: Sprite) {
+    myDart = darts.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . 3 . . . . . . . . . . . 
+        . . . . 3 . . . . . 4 . . . . . 
+        . . . . . 5 4 5 4 d 4 . . . . . 
+        . . . . . d d 1 d 5 4 . . . . . 
+        . . . . 4 5 5 1 5 1 d 4 . . . . 
+        . . . . 4 5 1 5 5 5 5 4 . . . . 
+        . . . . . 3 5 5 d 5 d 4 . . . . 
+        . . . . 4 5 3 d d d 5 . . . . . 
+        . . . . 4 d 4 d d 3 d . . . . . 
+        . . . . 4 4 . 4 4 . 4 . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Projectile, 77, 60)
+    myDart.setTrace()
+    myDart.controlWithArrowKeys(true)
+}
+function towerSprite (Tower: Sprite) {
+    mySprite2 = 77
+    mySprite3 = 60
+    Tower.setPosition(mySprite2, mySprite3)
+}
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(sprite)
 })
+function Shop (Tower_dart: Sprite) {
+    Piont_yeild = false
+    continueShoping = true
+    while (continueShoping == true) {
+        Buy_speed = game.ask("Do you want to buy a speed upgrade (3 points)")
+        if (true == Buy_speed && 3 <= info.score()) {
+            game.splash("Purchase confirmed")
+            Tower_dart.vx += 10
+            Tower_dart.vy += 10
+            info.changeScoreBy(-3)
+        } else if (info.score() < 3) {
+            game.splash("Not enough coins")
+        }
+        Buy_health = game.ask("Do you want to buy health (10 points)")
+        if (Buy_health == true && 10 <= info.score()) {
+            game.splash("Purchase confirmed")
+            info.changeLifeBy(1)
+            info.changeScoreBy(-10)
+        } else if (info.score() < 10) {
+            game.splash("Not enough coins")
+        }
+        continueShoping = game.ask("Do you want to continue shopping ")
+    }
+    return 0
+}
 function enemy (red: Sprite, tower: Sprite, enemy_size: number, levle: number) {
     side = randint(1, 4)
     if (side == 1) {
@@ -15,50 +71,61 @@ function enemy (red: Sprite, tower: Sprite, enemy_size: number, levle: number) {
     red.follow(tower, 50 + level)
     pause(400)
 }
-let mySprite: Sprite = null
-let enemybadred: Sprite = null
 let side = 0
+let Buy_health = false
+let Buy_speed = false
+let continueShoping = false
+let Piont_yeild = false
+let mySprite3 = 0
+let mySprite2 = 0
+let myDart: Dart = null
 let level = 0
-level = 0
-game.onUpdateInterval(600, function () {
-    level = level + 1
-    for (let index = 0; index < level + 4; index++) {
-        enemybadred = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . 2 2 2 2 2 2 2 . . . . . 
-            . . . . 2 4 4 4 4 4 2 . . . . . 
-            . . . . 2 4 5 f 5 4 2 . . . . . 
-            . . . . 2 4 4 4 4 4 2 . . . . . 
-            . . . . 2 2 2 2 2 2 2 2 2 . . . 
-            . . 2 2 2 2 2 2 4 4 4 4 2 . . . 
-            . . 2 4 4 4 4 2 4 5 f 4 2 . . . 
-            . . 2 4 f 5 4 2 4 5 5 4 2 . . . 
-            . . 2 4 4 4 4 2 4 4 4 4 2 . . . 
-            . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Enemy)
-        mySprite = sprites.create(img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
-            . . . f f f 2 2 2 2 f f f . . . 
-            . . f f f e e e e e e f f f . . 
-            . . f f e 2 2 2 2 2 2 e e f . . 
-            . . f e 2 f f f f f f 2 e f . . 
-            . . f f f f e e e e f f f f . . 
-            . f f e f b f 4 4 f b f e f f . 
-            . f e e 4 1 f d d f 1 4 e e f . 
-            . . f e e d d d d d d e e f . . 
-            . . . f e e 4 4 4 4 e e f . . . 
-            . . e 4 f 2 2 2 2 2 2 f 4 e . . 
-            . . 4 d f 2 2 2 2 2 2 f d 4 . . 
-            . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-            . . . . . f f f f f f . . . . . 
-            . . . . . f f . . f f . . . . . 
-            `, SpriteKind.Player)
-        enemy(enemybadred, mySprite, 1, 1)
+level = 1
+let mySprite = sprites.create(img`
+    . . . . . . . . . . . . . . . . . 
+    . . . . . 6 6 6 6 6 6 6 . . . . . 
+    . . . 6 6 8 8 8 8 8 8 8 6 6 . . . 
+    . . 6 8 8 . . . . . . . 8 8 6 . . 
+    . . 6 8 . . . . . . . . . 8 6 . . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . 6 8 . . . . . . . . . . . 8 6 . 
+    . . 6 8 . . . . . . . . . 8 6 . . 
+    . . 6 8 8 . . . . . . . 8 8 6 . . 
+    . . . 6 6 8 8 8 8 8 8 8 6 6 . . . 
+    . . . . . 6 6 6 6 6 6 6 . . . . . 
+    . . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
+towerSprite(mySprite)
+Projectiles(myDart)
+let enemybadred = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . 2 2 2 2 2 2 2 . . . . . 
+    . . . . 2 4 4 4 4 4 2 . . . . . 
+    . . . . 2 4 5 f 5 4 2 . . . . . 
+    . . . . 2 4 4 4 4 4 2 . . . . . 
+    . . . . 2 2 2 2 2 2 2 2 2 . . . 
+    . . 2 2 2 2 2 2 4 4 4 4 2 . . . 
+    . . 2 4 4 4 4 2 4 5 f 4 2 . . . 
+    . . 2 4 f 5 4 2 4 5 5 4 2 . . . 
+    . . 2 4 4 4 4 2 4 4 4 4 2 . . . 
+    . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Enemy)
+while (true) {
+    for (let index = 0; index < level; index++) {
+        enemy(enemybadred, mySprite, 10, level)
     }
-})
+    pause(20000)
+    level += 1
+    Shop(myDart)
+    pause(100)
+}
