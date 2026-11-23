@@ -2,7 +2,9 @@
     "name": "test max share",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "darts": "*",
+        "new": "pub:87897-35444-77716-87994"
     },
     "files": [
         "main.blocks",
