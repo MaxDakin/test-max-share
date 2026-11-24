@@ -1,9 +1,11 @@
+// This code throughs the dart and makes a new ine
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    myDart.throwDart()
-    Projectiles(myDart)
+    The_light.throwDart()
+    Projectiles(The_light)
 })
+// This function defines the darts
 function Projectiles (dart: Sprite) {
-    myDart = darts.create(img`
+    The_light = darts.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . 3 . . . . . . . . . . . 
@@ -21,17 +23,22 @@ function Projectiles (dart: Sprite) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Projectile, 77, 60)
-    myDart.setTrace()
-    myDart.controlWithArrowKeys(true)
+    The_light.setTrace()
+    The_light.controlWithArrowKeys(true)
 }
+// This function designs the tower’s properties.
 function towerSprite (Tower: Sprite) {
-    mySprite2 = 77
-    mySprite3 = 60
-    Tower.setPosition(mySprite2, mySprite3)
+    let mySprite2 = 0
+    X = 77
+    Y = 60
+    Tower.setPosition(mySprite2, Y)
 }
+// This code defines how to kill an enemy
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(sprite)
+    info.changeScoreBy(1)
 })
+// This function calls the shop after the level ends.
 function Shop (Tower_dart: Sprite) {
     Piont_yeild = false
     continueShoping = true
@@ -57,6 +64,7 @@ function Shop (Tower_dart: Sprite) {
     }
     return 0
 }
+// This function eefines the enemy properties.
 function enemy (red: Sprite, tower: Sprite, enemy_size: number, levle: number) {
     side = randint(1, 4)
     if (side == 1) {
@@ -71,17 +79,18 @@ function enemy (red: Sprite, tower: Sprite, enemy_size: number, levle: number) {
     red.follow(tower, 50 + level)
     pause(400)
 }
+// This code defines the nessesary finctions and sets up the levels.
 let side = 0
 let Buy_health = false
 let Buy_speed = false
 let continueShoping = false
 let Piont_yeild = false
-let mySprite3 = 0
-let mySprite2 = 0
-let myDart: Dart = null
+let Y = 0
+let X = 0
+let The_light: Dart = null
 let level = 0
 level = 1
-let mySprite = sprites.create(img`
+let Tower = sprites.create(img`
     . . . . . . . . . . . . . . . . . 
     . . . . . 6 6 6 6 6 6 6 . . . . . 
     . . . 6 6 8 8 8 8 8 8 8 6 6 . . . 
@@ -100,8 +109,8 @@ let mySprite = sprites.create(img`
     . . . . . 6 6 6 6 6 6 6 . . . . . 
     . . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
-towerSprite(mySprite)
-Projectiles(myDart)
+towerSprite(Tower)
+Projectiles(The_light)
 let enemybadred = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -122,10 +131,10 @@ let enemybadred = sprites.create(img`
     `, SpriteKind.Enemy)
 while (true) {
     for (let index = 0; index < level; index++) {
-        enemy(enemybadred, mySprite, 10, level)
+        enemy(enemybadred, Tower, 10, level)
     }
     pause(20000)
     level += 1
-    Shop(myDart)
+    Shop(The_light)
     pause(100)
 }
