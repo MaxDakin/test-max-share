@@ -1,3 +1,6 @@
+/**
+ * This code defines the nessesary finctions and sets up the levels.
+ */
 // This code throughs the dart and makes a new ine
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     The_light.throwDart()
@@ -84,7 +87,6 @@ function enemy (red: Sprite, tower: Sprite, enemy_size: number, levle: number) {
     red.follow(tower, 50 + level)
     pause(400)
 }
-// This code defines the nessesary finctions and sets up the levels.
 let side = 0
 let Buy_health = false
 let Buy_speed = false
