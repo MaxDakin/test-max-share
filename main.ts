@@ -28,10 +28,9 @@ function Projectiles (dart: Sprite) {
 }
 // This function designs the tower’s properties.
 function towerSprite (Tower: Sprite) {
-    let mySprite2 = 0
     X = 77
     Y = 60
-    Tower.setPosition(mySprite2, Y)
+    Tower.setPosition(X, Y)
 }
 // This code defines how to kill an enemy
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
@@ -44,6 +43,7 @@ function Shop (Tower_dart: Sprite) {
     continueShoping = true
     while (continueShoping == true) {
         Buy_speed = game.ask("Do you want to buy a speed upgrade (3 points)")
+        // Conditional statement
         if (true == Buy_speed && 3 <= info.score()) {
             game.splash("Purchase confirmed")
             Tower_dart.vx += 10
@@ -62,8 +62,13 @@ function Shop (Tower_dart: Sprite) {
         }
         continueShoping = game.ask("Do you want to continue shopping ")
     }
-    return 0
+    // Return value
+    return Tower_dart
 }
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    sprites.destroy(sprite)
+    info.changeLifeBy(-1)
+})
 // This function eefines the enemy properties.
 function enemy (red: Sprite, tower: Sprite, enemy_size: number, levle: number) {
     side = randint(1, 4)
@@ -87,6 +92,7 @@ let continueShoping = false
 let Piont_yeild = false
 let Y = 0
 let X = 0
+let enemybadred: Sprite = null
 let The_light: Dart = null
 let level = 0
 level = 1
@@ -111,26 +117,26 @@ let Tower = sprites.create(img`
     `, SpriteKind.Player)
 towerSprite(Tower)
 Projectiles(The_light)
-let enemybadred = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . 2 2 2 2 2 2 2 . . . . . 
-    . . . . 2 4 4 4 4 4 2 . . . . . 
-    . . . . 2 4 5 f 5 4 2 . . . . . 
-    . . . . 2 4 4 4 4 4 2 . . . . . 
-    . . . . 2 2 2 2 2 2 2 2 2 . . . 
-    . . 2 2 2 2 2 2 4 4 4 4 2 . . . 
-    . . 2 4 4 4 4 2 4 5 f 4 2 . . . 
-    . . 2 4 f 5 4 2 4 5 5 4 2 . . . 
-    . . 2 4 4 4 4 2 4 4 4 4 2 . . . 
-    . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Enemy)
 while (true) {
     for (let index = 0; index < level; index++) {
+        enemybadred = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . 2 2 2 2 2 2 2 . . . . . 
+            . . . . 2 4 4 4 4 4 2 . . . . . 
+            . . . . 2 4 5 f 5 4 2 . . . . . 
+            . . . . 2 4 4 4 4 4 2 . . . . . 
+            . . . . 2 2 2 2 2 2 2 2 2 . . . 
+            . . 2 2 2 2 2 2 4 4 4 4 2 . . . 
+            . . 2 4 4 4 4 2 4 5 f 4 2 . . . 
+            . . 2 4 f 5 4 2 4 5 5 4 2 . . . 
+            . . 2 4 4 4 4 2 4 4 4 4 2 . . . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Enemy)
         enemy(enemybadred, Tower, 10, level)
     }
     pause(20000)
